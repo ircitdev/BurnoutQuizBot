@@ -211,6 +211,11 @@ async def ask_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     idx = context.user_data.get('current_question', 0)
 
+    # Initialize score if starting quiz
+    if idx == 0:
+        context.user_data['score'] = 0
+        context.user_data['answers'] = []
+
     if idx >= len(QUIZ_DATA):
         await show_result(update, context)
         return
