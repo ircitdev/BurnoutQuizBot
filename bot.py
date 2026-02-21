@@ -356,7 +356,7 @@ async def show_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         await context.bot.send_photo(
             chat_id=update.effective_chat.id,
-            photo="https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/start.jpg",
+            photo="https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/end.jpg",
             caption=text,
             parse_mode='Markdown',
             reply_markup=InlineKeyboardMarkup(keyboard)
