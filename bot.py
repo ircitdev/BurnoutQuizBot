@@ -89,7 +89,7 @@ def db_save_answers(user_id, answers):
     c.execute('DELETE FROM answers WHERE user_id = ?', (user_id,))
     for a in answers:
         c.execute('INSERT INTO answers (user_id, question_idx, answer_idx, is_correct) VALUES (?, ?, ?, ?)',
-                  (user_id, a['q_idx'], a['ans_idx'], int(a['is_correct'])))
+                  (user_id, a['q_idx'], a['ans_idx'], a['score_value']))
     conn.commit()
     conn.close()
 
