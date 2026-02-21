@@ -215,6 +215,7 @@ async def ask_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if idx == 0:
         context.user_data['score'] = 0
         context.user_data['answers'] = []
+        context.user_data['current_question'] = 0
 
     if idx >= len(QUIZ_DATA):
         await show_result(update, context)
