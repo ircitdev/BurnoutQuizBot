@@ -121,7 +121,7 @@ def db_get_user_by_topic(topic_id):
 QUIZ_DATA = [
     {
         "q": "In the past two weeks, how often have you felt emotionally drained or depleted by your work?",
-        "img": "https://images.unsplash.com/photo-1551847812-4930e8e6e0d4?auto=format&fit=crop&w=800&q=80",
+        "img": "https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/1.jpg",
         "scale": [
             ("Never", 0),
             ("Rarely", 1),
@@ -132,7 +132,7 @@ QUIZ_DATA = [
     },
     {
         "q": "After a full night of sleep or a weekend off, how often do you still feel tired and not fully restored?",
-        "img": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
+        "img": "https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/2.jpg",
         "scale": [
             ("Never", 0),
             ("Rarely", 1),
@@ -143,7 +143,7 @@ QUIZ_DATA = [
     },
     {
         "q": "How often do you struggle to concentrate, make decisions, or think clearly compared to your usual baseline?",
-        "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+        "img": "https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/3.jpg",
         "scale": [
             ("Never", 0),
             ("Rarely", 1),
@@ -154,7 +154,7 @@ QUIZ_DATA = [
     },
     {
         "q": "How often do you feel more detached, irritable, or less empathetic toward colleagues, clients, or family than you used to?",
-        "img": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+        "img": "https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/4.jpg",
         "scale": [
             ("Never", 0),
             ("Rarely", 1),
@@ -165,7 +165,7 @@ QUIZ_DATA = [
     },
     {
         "q": "How often do you feel that your work is no longer meaningful or that your impact is lower than it used to be?",
-        "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
+        "img": "https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/5.jpg",
         "scale": [
             ("Never", 0),
             ("Rarely", 1),
@@ -194,7 +194,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['answers'] = []
     
     await update.message.reply_photo(
-        photo="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        photo="https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/start.jpg",
         caption=(
             f"Hi, {user.first_name}! 👋\n\n"
             "Feeling emotionally drained? Take our 5-question burnout screening.\n\n"
@@ -356,7 +356,7 @@ async def show_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         await context.bot.send_photo(
             chat_id=update.effective_chat.id,
-            photo="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1792&q=80",
+            photo="https://storage.googleapis.com/uspeshnyy-projects/burnout/tg/start.jpg",
             caption=text,
             parse_mode='Markdown',
             reply_markup=InlineKeyboardMarkup(keyboard)
