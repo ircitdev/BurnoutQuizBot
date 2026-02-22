@@ -242,3 +242,127 @@ https://t.me/BurnoutQuizBot?start=ИСТОЧНИК
 **Разработчик**: ircitdev
 
 **Контакт для поддержки**: Telegram ID 5229587470, 65876198
+
+## Управление ботом на сервере
+
+Бот настроен с автоматическим запуском через systemd. Это означает:
+- ✅ Бот автоматически запускается при перезагрузке сервера
+- ✅ Если бот упадёт, он автоматически перезапустится через 10 секунд
+- ✅ Невозможен запуск нескольких копий одновременно
+
+### Команды управления
+
+Для управления ботом используйте скрипт `/root/BurnoutQuizBot/manage.sh`:
+
+```bash
+# Запустить бота
+./manage.sh start
+
+# Остановить бота
+./manage.sh stop
+
+# Перезапустить бота
+./manage.sh restart
+
+# Посмотреть статус
+./manage.sh status
+
+# Посмотреть логи в реальном времени
+./manage.sh logs
+
+# Посмотреть последние ошибки
+./manage.sh errors
+
+# Развернуть новую версию с GitHub
+./manage.sh deploy
+```
+
+### Альтернативные команды (systemctl)
+
+Можно также использовать стандартные systemd команды:
+
+```bash
+# Запустить
+systemctl start burnout-bot.service
+
+# Остановить
+systemctl stop burnout-bot.service
+
+# Перезапустить
+systemctl restart burnout-bot.service
+
+# Статус
+systemctl status burnout-bot.service
+
+# Включить автозапуск
+systemctl enable burnout-bot.service
+
+# Выключить автозапуск
+systemctl disable burnout-bot.service
+
+# Посмотреть логи
+journalctl -u burnout-bot.service -f
+```
+
+### Развёртывание обновлений
+
+Когда я внесу изменения в код, развернуть обновление можно так:
+
+```bash
+cd /root/BurnoutQuizBot
+./manage.sh deploy
+```
+
+Или вручную:
+
+```bash
+cd /root/BurnoutQuizBot
+git pull
+systemctl restart burnout-bot.service
+```
+
+### Проверка работы
+
+```bash
+# Проверить, что бот запущен
+systemctl is-active burnout-bot.service
+
+# Посмотреть последние логи
+tail -50 /root/BurnoutQuizBot/bot.log
+
+# Найти ошибки
+grep ERROR /root/BurnoutQuizBot/bot.log | tail -20
+```
+
+### Расположение файлов
+
+- **Код бота**: `/root/BurnoutQuizBot/bot.py`
+- **База данных**: `/root/BurnoutQuizBot/bot_database.db`
+- **Логи**: `/root/BurnoutQuizBot/bot.log`
+- **Systemd сервис**: `/etc/systemd/system/burnout-bot.service`
+- **Скрипт управления**: `/root/BurnoutQuizBot/manage.sh`
+
+### В случае проблем
+
+Если бот не отвечает:
+
+1. Проверьте статус:
+   ```bash
+   systemctl status burnout-bot.service
+   ```
+
+2. Посмотрите последние ошибки:
+   ```bash
+   tail -100 /root/BurnoutQuizBot/bot.log | grep ERROR
+   ```
+
+3. Перезапустите бот:
+   ```bash
+   systemctl restart burnout-bot.service
+   ```
+
+4. Если проблема не решилась — напишите мне, я проверю логи удалённо.
+
+---
+
+**Обновлено**: 22 февраля 2026 (добавлен автозапуск через systemd)
