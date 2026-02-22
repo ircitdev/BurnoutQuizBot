@@ -304,7 +304,8 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def next_question_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Move to the next question"""
-    context.user_data['current_question'] += 1
+    current = context.user_data.get('current_question', 0)
+    context.user_data['current_question'] = current + 1
     await ask_question(update, context)
 
 async def show_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
