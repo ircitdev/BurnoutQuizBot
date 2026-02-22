@@ -269,9 +269,13 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
     q_data = QUIZ_DATA[idx]
     score_value = q_data["scale"][ans_idx][1]  # Get the 0-4 score
 
-    # Save answer
+    # Initialize if needed
+    if 'score' not in context.user_data:
+        context.user_data['score'] = 0
     if 'answers' not in context.user_data:
         context.user_data['answers'] = []
+
+    # Save answer
     context.user_data['answers'].append({
         'q_idx': idx,
         'ans_idx': ans_idx,
